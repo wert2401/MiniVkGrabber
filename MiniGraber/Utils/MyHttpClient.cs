@@ -29,5 +29,20 @@ namespace MiniGraber
         {
             if (client == null) client = new HttpClient();
         }
+
+        public static async Task<bool> CheckConnection()
+        {
+            CheckIfInitialized();
+            bool t = true;
+            try
+            {
+                HttpResponseMessage m = await client.GetAsync("https://google.com/");
+            }
+            catch
+            {
+                t = false;
+            }
+            return t;
+        }
     }
 }

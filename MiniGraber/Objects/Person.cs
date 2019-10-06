@@ -17,11 +17,13 @@ namespace MiniGraber
         public string bdate;
         public City city;
         public string photo_200_orig;
-        public string FullName { 
-            get 
+        public string FullName {
+            get
             {
                 return first_name + " " + last_name;
-            } 
+            }
+
+            private set { }
         }
 
         public override string ToString()

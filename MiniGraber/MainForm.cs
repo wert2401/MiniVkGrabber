@@ -31,7 +31,7 @@ namespace MiniGraber
             }
             if (id == 0)
             {
-                MessageBox.Show("Person is not found. Check yout adress. йцуйц", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Person is not found. Check yout adress.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 btnStart.Enabled = true;
                 return;
             }
@@ -57,11 +57,26 @@ namespace MiniGraber
             btnStart.Enabled = true;
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
         private void tbUserId_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
                 btnStart.PerformClick();
+            }
+        }
+
+        private async void MainForm_Load(object sender, EventArgs e)
+        {
+            bool online = await MyHttpClient.CheckConnection();
+            if (!online)
+            {
+                btnStart.Enabled = false;
+                btnStart.Text = "No connection!";
             }
         }
 
@@ -78,10 +93,11 @@ namespace MiniGraber
             lbName.Text = name.FullName;
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
+        //private async void CheckConnection()
+        //{
+
+        //}
+        
     }
 }
 
