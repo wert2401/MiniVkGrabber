@@ -1,0 +1,13 @@
+D:\Projects\MiniGraber\MiniGraber\bin\Debug\MiniGraber.exe.config
+D:\Projects\MiniGraber\MiniGraber\bin\Debug\MiniGraber.exe
+D:\Projects\MiniGraber\MiniGraber\bin\Debug\MiniGraber.pdb
+D:\Projects\MiniGraber\MiniGraber\bin\Debug\Newtonsoft.Json.dll
+D:\Projects\MiniGraber\MiniGraber\bin\Debug\Newtonsoft.Json.xml
+D:\Projects\MiniGraber\MiniGraber\obj\Debug\MiniGraber.Properties.Resources.resources
+D:\Projects\MiniGraber\MiniGraber\obj\Debug\MiniGraber.csproj.GenerateResource.cache
+D:\Projects\MiniGraber\MiniGraber\obj\Debug\MiniGraber.csproj.CopyComplete
+D:\Projects\MiniGraber\MiniGraber\obj\Debug\MiniGraber.exe
+D:\Projects\MiniGraber\MiniGraber\obj\Debug\MiniGraber.pdb
+D:\Projects\MiniGraber\MiniGraber\obj\Debug\MiniGraber.MainForm.resources
+D:\Projects\MiniGraber\MiniGraber\obj\Debug\MiniGraber.PersonCard.resources
+D:\Projects\MiniGraber\MiniGraber\obj\Debug\MiniGraber.csprojAssemblyReference.cache
