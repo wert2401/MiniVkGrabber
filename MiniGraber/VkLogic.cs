@@ -18,7 +18,7 @@ namespace MiniGraber
         public async Task<string> GetPersonFriends(string id)
         {
             string[] fields = new string[] { "bdate", "city", "photo_200_orig" };
-            Dictionary<string, string> pars = new Dictionary<string, string>() { { "user_id", id }, { "name_case", "nom" }, { "count", "100" }, { "order", "name" } };
+            Dictionary<string, string> pars = new Dictionary<string, string>() { { "user_id", id }, { "name_case", "nom" }, { "count", "200" }, { "order", "name" } };
             string method = "friends.get";
             string uri = GetMethodUri(method, pars, fields);
             string result = await MyHttpClient.Get(uri);

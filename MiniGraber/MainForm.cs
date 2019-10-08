@@ -24,7 +24,7 @@ namespace MiniGraber
         private async void btnStart_Click(object sender, EventArgs e)
         {
             btnStart.Enabled = false;
-            Clear();
+            ClearPanels();
             if (!int.TryParse(tbUserId.Text, out id))//Проверка введен ли id или адрес
             {
                 int.TryParse(await vk.GetPersonId(tbUserId.Text), out id);
@@ -80,7 +80,7 @@ namespace MiniGraber
             }
         }
 
-        private void Clear()
+        private void ClearPanels()
         {
             rtbResponse.Text = "";
             frPanel.Controls.Clear();
@@ -92,12 +92,6 @@ namespace MiniGraber
             Person name = JSONProcessor.ParsePerson(p);
             lbName.Text = name.FullName;
         }
-
-        //private async void CheckConnection()
-        //{
-
-        //}
-        
     }
 }
 
