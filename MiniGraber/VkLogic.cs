@@ -20,8 +20,7 @@ namespace MiniGraber
             string[] fields = new string[] { "bdate", "city", "photo_200_orig" };
             Dictionary<string, string> pars = new Dictionary<string, string>() { { "user_id", id }, { "name_case", "nom" }, { "count", "200" }, { "order", "name" } };
             string method = "friends.get";
-            string uri = GetMethodUri(method, pars, fields);
-            string result = await MyHttpClient.Get(uri);
+            string result = await MyHttpClient.Get(GetMethodUri(method, pars, fields));
             if (JSONProcessor.TryParseError(result))
             {
                 return "Error";

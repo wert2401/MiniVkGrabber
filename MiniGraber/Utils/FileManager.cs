@@ -19,6 +19,10 @@ namespace MiniGraber
                     token = sr.ReadLine();
                 }
             }
+            else
+            {
+                return "Error";
+            }
             return token;
         }
 

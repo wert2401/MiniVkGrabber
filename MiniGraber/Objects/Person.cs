@@ -12,7 +12,6 @@ namespace MiniGraber
         public string last_name;
         public bool is_closed;
         public bool can_access_closed;
-        int online;
         public string track_code;
         public string bdate;
         public City city;
@@ -28,10 +27,10 @@ namespace MiniGraber
 
         public override string ToString()
         {
-            string output = FullName;
+            string output = FullName + " ";
             if (city.title != null)
             {
-                output += $" This person is from {city.title}. ";
+                output += $"This person is from {city.title}. ";
             }
             if (bdate != null)
             {

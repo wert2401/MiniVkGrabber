@@ -11,6 +11,7 @@ using System.Collections.Generic;
 
 namespace MiniGraber
 {
+    // Поправить получение токена для запросов
     public partial class MainForm : Form
     {
         VkLogic vk;
@@ -18,7 +19,6 @@ namespace MiniGraber
         public MainForm()
         {
             InitializeComponent();
-            vk = new VkLogic(FileManager.GetToken());
         }
 
         private async void btnStart_Click(object sender, EventArgs e)
@@ -72,6 +72,16 @@ namespace MiniGraber
 
         private async void MainForm_Load(object sender, EventArgs e)
         {
+            string token = FileManager.GetToken();
+            if (token != "Error")
+            {
+                vk = new VkLogic(FileManager.GetToken());
+            }
+            else
+            {
+                MessageBox.Show("You need to have token.txt in folder bin/Debug.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
             bool online = await MyHttpClient.CheckConnection();
             if (!online)
             {
