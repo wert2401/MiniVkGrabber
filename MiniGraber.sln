@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.29324.140
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniGraber", "MiniGraber\MiniGraber.csproj", "{1C0532B9-19BF-4C06-B9F4-B8DD19F14F07}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerSideMiniGraber", "ServerSideMiniGraber\ServerSideMiniGraber.csproj", "{82795DEE-2448-470E-9F06-F4A5CE2E1BFB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{1C0532B9-19BF-4C06-B9F4-B8DD19F14F07}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1C0532B9-19BF-4C06-B9F4-B8DD19F14F07}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1C0532B9-19BF-4C06-B9F4-B8DD19F14F07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82795DEE-2448-470E-9F06-F4A5CE2E1BFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82795DEE-2448-470E-9F06-F4A5CE2E1BFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82795DEE-2448-470E-9F06-F4A5CE2E1BFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82795DEE-2448-470E-9F06-F4A5CE2E1BFB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

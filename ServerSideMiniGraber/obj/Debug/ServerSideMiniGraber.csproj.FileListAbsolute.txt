@@ -1,0 +1,9 @@
+D:\Projects\MiniGraber\ServerSideMiniGraber\bin\Debug\ServerSideMiniGraber.exe.config
+D:\Projects\MiniGraber\ServerSideMiniGraber\bin\Debug\ServerSideMiniGraber.exe
+D:\Projects\MiniGraber\ServerSideMiniGraber\bin\Debug\ServerSideMiniGraber.pdb
+D:\Projects\MiniGraber\ServerSideMiniGraber\bin\Debug\Newtonsoft.Json.dll
+D:\Projects\MiniGraber\ServerSideMiniGraber\bin\Debug\Newtonsoft.Json.xml
+D:\Projects\MiniGraber\ServerSideMiniGraber\obj\Debug\ServerSideMiniGraber.csprojAssemblyReference.cache
+D:\Projects\MiniGraber\ServerSideMiniGraber\obj\Debug\ServerSideMiniGraber.csproj.CopyComplete
+D:\Projects\MiniGraber\ServerSideMiniGraber\obj\Debug\ServerSideMiniGraber.exe
+D:\Projects\MiniGraber\ServerSideMiniGraber\obj\Debug\ServerSideMiniGraber.pdb

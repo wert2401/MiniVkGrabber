@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using ServerSideMiniGraber.Objects;
 using Newtonsoft.Json;
 
-namespace MiniGraber
+namespace ServerSideMiniGraber.VKLogic
 {
     static class JSONProcessor
     {

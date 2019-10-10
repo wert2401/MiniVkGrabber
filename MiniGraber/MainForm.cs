@@ -8,14 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Collections.Generic;
+using MiniGraber.ClientLogic;
 
 namespace MiniGraber
 {
-    // Поправить получение токена для запросов
     public partial class MainForm : Form
     {
-        VkLogic vk;
-        int id;
+        Client client;
         public MainForm()
         {
             InitializeComponent();
@@ -24,41 +23,20 @@ namespace MiniGraber
         private async void btnStart_Click(object sender, EventArgs e)
         {
             btnStart.Enabled = false;
-            ClearPanels();
-            if (!int.TryParse(tbUserId.Text, out id))//Проверка введен ли id или адрес
+            if (tbUserId.Text == "")
             {
-                int.TryParse(await vk.GetPersonId(tbUserId.Text), out id);
-            }
-            if (id == 0)
-            {
-                MessageBox.Show("Person is not found. Check yout adress.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Check your id or adress", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 btnStart.Enabled = true;
                 return;
             }
-
-            SetName();
-
-            string response = await vk.GetPersonFriends(id.ToString());
-            if (response == "Error")
-            {
-                MessageBox.Show("Person is not found. Check yout adress.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                btnStart.Enabled = true;
-                return;
-            }
-            List<Person> people = JSONProcessor.ParsePeople(response);
-            lbCount.Text = people.Count.ToString();
-            foreach (Person item in people)
-            {
-                rtbResponse.Text += item.ToString();
-                PersonCard pc = new PersonCard();
-                pc.SetPerson(item);
-                frPanel.Controls.Add(pc);
-            }
+            string resp = await Task.Run(GetPerson);
+            rtbResponse.Text += resp;
             btnStart.Enabled = true;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            client.Disconnect();
             Application.Exit();
         }
 
@@ -70,23 +48,17 @@ namespace MiniGraber
             }
         }
 
-        private async void MainForm_Load(object sender, EventArgs e)
+        private void MainForm_Load(object sender, EventArgs e)
         {
-            string token = FileManager.GetToken();
-            if (token != "Error")
+            client = new Client();
+            try
             {
-                vk = new VkLogic(FileManager.GetToken());
+                client.Connect("127.0.0.1", 8888);
             }
-            else
+            catch
             {
-                MessageBox.Show("You need to have token.txt in folder bin/Debug.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error, can`t connect to server", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
-            }
-            bool online = await MyHttpClient.CheckConnection();
-            if (!online)
-            {
-                btnStart.Enabled = false;
-                btnStart.Text = "No connection!";
             }
         }
 
@@ -96,11 +68,27 @@ namespace MiniGraber
             frPanel.Controls.Clear();
         }
 
+        private string GetPerson()
+        {
+            string resp = "";
+            if (client.IsConnected)
+            {
+                try
+                {
+                    resp = client.SendRequest(new CommandObject("getFriends", tbUserId.Text));
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Error, can`t connect to server", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Application.Exit();
+                }
+            }
+            return resp;
+        }
+
         private async void SetName()
         {
-            string p = await vk.GetPerson(id.ToString());
-            Person name = JSONProcessor.ParsePerson(p);
-            lbName.Text = name.FullName;
+
         }
     }
 }
