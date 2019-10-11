@@ -44,15 +44,16 @@ namespace MiniGraber.ClientLogic
         {
             try
             {
-                byte[] data = new byte[64];
+                byte[] data = new byte[256];
                 StringBuilder builder = new StringBuilder();
                 do
                 {
+                    Array.Clear(data, 0, data.Length);
                     stream.Read(data, 0, data.Length);
                     builder.Append(Encoding.UTF8.GetString(data));
                 } while (stream.DataAvailable);
 
-                return builder.ToString();
+                return builder.ToString().Replace("\0", "");
             }
             catch (Exception)
             {

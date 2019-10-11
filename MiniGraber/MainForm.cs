@@ -9,34 +9,29 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using MiniGraber.ClientLogic;
+using MiniGraber.Objects;
 
 namespace MiniGraber
 {
     public partial class MainForm : Form
     {
-        Client client;
+        Requests req;
         public MainForm()
         {
             InitializeComponent();
         }
-
-        private async void btnStart_Click(object sender, EventArgs e)
+        // Починить
+        private void btnStart_Click(object sender, EventArgs e)
         {
             btnStart.Enabled = false;
-            if (tbUserId.Text == "")
-            {
-                MessageBox.Show("Check your id or adress", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                btnStart.Enabled = true;
-                return;
-            }
-            string resp = await Task.Run(GetPerson);
-            rtbResponse.Text += resp;
+            Task.Run(GetFriends;
+            Task.Run(GetPerson);
             btnStart.Enabled = true;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            client.Disconnect();
+            req.Disconnect();
             Application.Exit();
         }
 
@@ -50,10 +45,9 @@ namespace MiniGraber
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            client = new Client();
             try
             {
-                client.Connect("127.0.0.1", 8888);
+                req = new Requests("127.0.0.1", 8888);
             }
             catch
             {
@@ -62,30 +56,41 @@ namespace MiniGraber
             }
         }
 
+        private void GetPerson()
+        {
+            if (tbUserId.Text == "")
+            {
+                MessageBox.Show("Check your id or adress", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                btnStart.Enabled = true;
+                return;
+            }
+            Person p = req.GetPerson(tbUserId.Text);
+            lbName.Text = p.FullName;
+        }
+
+        private void GetFriends()
+        {
+            if (tbUserId.Text == "")
+            {
+                MessageBox.Show("Check your id or adress", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                btnStart.Enabled = true;
+                return;
+            }
+            List<Person> people = req.GetFriends(tbUserId.Text);
+            lbCount.Text = people.Count.ToString();
+            foreach (Person item in people)
+            {
+                PersonCard pc = new PersonCard();
+                frPanel.Controls.Add(pc);
+                pc.SetPerson(item);
+            }
+        }
+
         private void ClearPanels()
         {
             rtbResponse.Text = "";
             frPanel.Controls.Clear();
         }
-
-        private string GetPerson()
-        {
-            string resp = "";
-            if (client.IsConnected)
-            {
-                try
-                {
-                    resp = client.SendRequest(new CommandObject("getFriends", tbUserId.Text));
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Error, can`t connect to server", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    Application.Exit();
-                }
-            }
-            return resp;
-        }
-
         private async void SetName()
         {
 

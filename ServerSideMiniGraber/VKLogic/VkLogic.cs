@@ -25,11 +25,6 @@ namespace ServerSideMiniGraber.VKLogic
             string method = "friends.get";
             string result = await MyHttpClient.Get(GetMethodUri(method, pars, fields));
 
-            if (JSONProcessor.TryParseError(result))
-            {
-                return people;
-            }
-
             people = result.Substring(12, result.Length-13);
             return people;
         }

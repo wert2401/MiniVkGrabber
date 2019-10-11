@@ -11,16 +11,17 @@ namespace ServerSideMiniGraber.CommandLogic
 {
     class CommandHolder
     {
-        List<ICommand> commands = new List<ICommand>();
+        List<Command> commands = new List<Command>();
         VkLogic vk = new VkLogic(FileManager.GetToken());
         public CommandHolder()
         {
             commands.Add(new CmdGetFriends("getFriends", vk));
+            commands.Add(new CmdGetPerson("getPerson", vk));
         }
 
         public async Task<string> DoCommand(CommandObject message)
         {
-            foreach (ICommand command in commands)
+            foreach (Command command in commands)
             {
                 if (command.Prefix == message.Method)
                 {

@@ -50,7 +50,8 @@
   <ItemGroup>
     <Compile Include="CommandLogic\CommandHolder.cs" />
     <Compile Include="CommandLogic\Commands\CmdGetFriends.cs" />
-    <Compile Include="CommandLogic\ICommand.cs" />
+    <Compile Include="CommandLogic\Commands\CmdGetPerson.cs" />
+    <Compile Include="CommandLogic\Command.cs" />
     <Compile Include="Objects\Error.cs" />
     <Compile Include="Objects\Person.cs" />
     <Compile Include="Program.cs" />
@@ -59,7 +60,6 @@
     <Compile Include="CommandLogic\CommandObject.cs" />
     <Compile Include="ServerLogic\Server.cs" />
     <Compile Include="VKLogic\FileManager.cs" />
-    <Compile Include="VKLogic\JSONProcessor.cs" />
     <Compile Include="VKLogic\MyHttpClient.cs" />
     <Compile Include="VKLogic\VkLogic.cs" />
   </ItemGroup>

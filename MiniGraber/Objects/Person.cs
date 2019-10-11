@@ -3,7 +3,7 @@ using System.Runtime.Serialization.Json;
 using Newtonsoft.Json;
 
 
-namespace MiniGraber
+namespace MiniGraber.Objects
 {
     public struct Person
     {
