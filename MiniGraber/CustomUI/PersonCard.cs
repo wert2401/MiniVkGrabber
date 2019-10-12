@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MiniGraber.Utils;
 using MiniGraber.Objects;
+using System.Threading;
 
 namespace MiniGraber
 {
@@ -31,6 +32,7 @@ namespace MiniGraber
         }
         private async void SetImage(Person person)
         {
+            Thread.Sleep(1000); 
             roundPicture1.Image = await MyHttpClient.GetImage(person.photo_200_orig);
         }
 

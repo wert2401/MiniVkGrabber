@@ -38,6 +38,7 @@
             this.lbName = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.BtnClear = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnStart
@@ -94,7 +95,7 @@
             this.frPanel.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.frPanel.Location = new System.Drawing.Point(307, 39);
             this.frPanel.Name = "frPanel";
-            this.frPanel.Size = new System.Drawing.Size(586, 455);
+            this.frPanel.Size = new System.Drawing.Size(586, 543);
             this.frPanel.TabIndex = 4;
             // 
             // label2
@@ -155,12 +156,30 @@
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // BtnClear
+            // 
+            this.BtnClear.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.BtnClear.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.BtnClear.FlatAppearance.BorderSize = 5;
+            this.BtnClear.FlatAppearance.MouseDownBackColor = System.Drawing.Color.RoyalBlue;
+            this.BtnClear.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.BtnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnClear.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.BtnClear.Location = new System.Drawing.Point(12, 500);
+            this.BtnClear.Name = "BtnClear";
+            this.BtnClear.Size = new System.Drawing.Size(289, 64);
+            this.BtnClear.TabIndex = 10;
+            this.BtnClear.Text = "Clear";
+            this.BtnClear.UseVisualStyleBackColor = false;
+            this.BtnClear.Click += new System.EventHandler(this.BtnClear_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(905, 506);
+            this.ClientSize = new System.Drawing.Size(905, 594);
+            this.Controls.Add(this.BtnClear);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.lbName);
             this.Controls.Add(this.label4);
@@ -192,6 +211,7 @@
         private System.Windows.Forms.Label lbName;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button BtnClear;
     }
 }
 

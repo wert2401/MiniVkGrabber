@@ -10,12 +10,13 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using MiniGraber.ClientLogic;
 using MiniGraber.Objects;
+using System.Threading;
 
 namespace MiniGraber
 {
     public partial class MainForm : Form
     {
-        Requests req;
+        Client client;
         public MainForm()
         {
             InitializeComponent();
@@ -23,15 +24,38 @@ namespace MiniGraber
         // Починить
         private void btnStart_Click(object sender, EventArgs e)
         {
-            btnStart.Enabled = false;
-            Task.Run(GetFriends;
-            Task.Run(GetPerson);
-            btnStart.Enabled = true;
+            ClearPanels();
+            Task.Run(UpdateTable);
+        }
+
+        private void UpdateTable()
+        {
+            btnStart.BeginInvoke((Action)(() => { btnStart.Enabled = false; rtbResponse.Text += false; }));
+            if (tbUserId.Text == "")
+            {
+                MessageBox.Show("Check your id or adress", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                btnStart.BeginInvoke((Action)(() => { btnStart.Enabled = true; rtbResponse.Text += true; }));
+                return;
+            }
+            List<Person> people = client.GetFriends(tbUserId.Text);
+            Person p = client.GetPerson(tbUserId.Text);
+
+            foreach (Person item in people)
+            {
+                PersonCard pc = new PersonCard();
+                frPanel.BeginInvoke((Action)(() => { 
+                    frPanel.Controls.Add(pc);
+                    pc.SetPerson(item);
+                    lbName.Text = p.FullName;
+                    lbCount.Text = people.Count.ToString();
+                }));
+            }
+            btnStart.BeginInvoke((Action)(() => { btnStart.Enabled = true; rtbResponse.Text += true; }));
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            req.Disconnect();
+            client.Disconnect();
             Application.Exit();
         }
 
@@ -47,7 +71,8 @@ namespace MiniGraber
         {
             try
             {
-                req = new Requests("127.0.0.1", 8888);
+                client = new Client();
+                client.Connect("127.0.0.1", 8888);
             }
             catch
             {
@@ -56,44 +81,17 @@ namespace MiniGraber
             }
         }
 
-        private void GetPerson()
-        {
-            if (tbUserId.Text == "")
-            {
-                MessageBox.Show("Check your id or adress", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                btnStart.Enabled = true;
-                return;
-            }
-            Person p = req.GetPerson(tbUserId.Text);
-            lbName.Text = p.FullName;
-        }
-
-        private void GetFriends()
-        {
-            if (tbUserId.Text == "")
-            {
-                MessageBox.Show("Check your id or adress", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                btnStart.Enabled = true;
-                return;
-            }
-            List<Person> people = req.GetFriends(tbUserId.Text);
-            lbCount.Text = people.Count.ToString();
-            foreach (Person item in people)
-            {
-                PersonCard pc = new PersonCard();
-                frPanel.Controls.Add(pc);
-                pc.SetPerson(item);
-            }
-        }
-
         private void ClearPanels()
         {
             rtbResponse.Text = "";
+            lbCount.Text = "";
+            lbName.Text = "";
             frPanel.Controls.Clear();
         }
-        private async void SetName()
-        {
 
+        private void BtnClear_Click(object sender, EventArgs e)
+        {
+            ClearPanels();
         }
     }
 }

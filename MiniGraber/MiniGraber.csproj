@@ -54,7 +54,6 @@
   <ItemGroup>
     <Compile Include="ClientLogic\Client.cs" />
     <Compile Include="ClientLogic\CommandObject.cs" />
-    <Compile Include="Requests.cs" />
     <Compile Include="Utils\JSONProcessor.cs" />
     <Compile Include="Objects\Error.cs" />
     <Compile Include="CustomUI\RoundPicture.cs">

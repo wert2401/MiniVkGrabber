@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Sockets;
 using System.Net;
+using MiniGraber.Objects;
+using MiniGraber.Utils;
 
 namespace MiniGraber.ClientLogic
 {
@@ -12,14 +14,6 @@ namespace MiniGraber.ClientLogic
     {
         TcpClient client;
         NetworkStream stream;
-        public bool IsConnected { 
-            get 
-            {
-                return client.Connected;
-            } 
-
-            private set { }
-        }
 
         public Client()
         {
@@ -62,7 +56,7 @@ namespace MiniGraber.ClientLogic
             
         }
 
-        public string SendRequest(CommandObject command)
+        private string SendRequest(CommandObject command)
         {
             try
             {
@@ -76,6 +70,40 @@ namespace MiniGraber.ClientLogic
                 client.Close();
                 throw;
             }
+        }
+
+        public List<Person> GetFriends(string id)
+        {
+            string resp = "";
+            if (client.Connected)
+            {
+                try
+                {
+                    resp = SendRequest(new CommandObject("getFriends", id));
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+            return JSONProcessor.ParsePeople(resp);
+        }
+
+        public Person GetPerson(string id)
+        {
+            string resp = "";
+            if (client.Connected)
+            {
+                try
+                {
+                    resp = SendRequest(new CommandObject("getPerson", id));
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+            return  JSONProcessor.ParsePerson(resp);
         }
 
         public void Disconnect()
