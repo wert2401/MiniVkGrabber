@@ -18,15 +18,11 @@ namespace ServerSideMiniGraber.VKLogic
 
         public async Task<string> GetPersonFriends(string id)
         {
-            string people = "Error";
-
             string[] fields = new string[] { "bdate", "city", "photo_200_orig" };
             Dictionary<string, string> pars = new Dictionary<string, string>() { { "user_id", id }, { "name_case", "nom" }, { "count", "200" }, { "order", "name" } };
             string method = "friends.get";
             string result = await MyHttpClient.Get(GetMethodUri(method, pars, fields));
-
-            people = result.Substring(12, result.Length-13);
-            return people;
+            return result;
         }
 
         public async Task<string> GetPersonId(string address)
@@ -41,9 +37,8 @@ namespace ServerSideMiniGraber.VKLogic
         {
             Dictionary<string, string> pars = new Dictionary<string, string>() { { "user_ids", id }, { "name_case", "Nom" } };
             string method = "users.get";
-            string result = await MyHttpClient.Get(GetMethodUri(method, pars));
 
-            return  result.Substring(13, result.Length - 15);
+            return await MyHttpClient.Get(GetMethodUri(method, pars));
         }
 
         string GetMethodUri(string methodName, Dictionary<string, string> pars, string[] fields)

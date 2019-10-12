@@ -37,7 +37,7 @@ namespace ServerSideMiniGraber.ServerLogic
                 {
                     TcpClient client = tcpListener.AcceptTcpClient();
                     Connection cl = new Connection(client, this, commandHolder);
-                    Thread clientThread = new Thread(new ThreadStart(cl.ProcessAsync));
+                    Thread clientThread = new Thread(new ThreadStart(cl.Process));
                     threads.Add(clientThread);
                     connections.Add(cl);
                     clientThread.Start();

@@ -24,7 +24,7 @@ namespace ServerSideMiniGraber.ServerLogic
             this.cmdHolder = cmdHolder;
         }
 
-        public async void ProcessAsync()
+        public void Process()
         {
             try
             {
@@ -44,7 +44,7 @@ namespace ServerSideMiniGraber.ServerLogic
                     }
 
                     CommandObject command = new CommandObject(request);
-                    string response = await cmdHolder.DoCommand(command);
+                    string response = cmdHolder.DoCommand(command).Result;
                     SendMessage(response);
                 }
             }
@@ -57,7 +57,7 @@ namespace ServerSideMiniGraber.ServerLogic
 
         private string GetMessage()
         {
-            byte[] data = new byte[64];
+            byte[] data = new byte[256];
             StringBuilder builder = new StringBuilder();
             int bytes;
             do

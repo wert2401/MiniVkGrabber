@@ -11,9 +11,8 @@ namespace ServerSideMiniGraber.CommandLogic.Commands
     {
         public CmdGetPerson(string prefix, VkLogic vk)
         : base(prefix, vk)
-        {
+        { }
 
-        }
         public override async Task<string> DoRequestAsync(string param)
         {
             string resp = await vk.GetPerson(param);
