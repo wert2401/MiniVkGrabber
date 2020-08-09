@@ -11,3 +11,4 @@ D:\Projects\MiniGraber\MiniGraber\obj\Debug\MiniGraber.pdb
 D:\Projects\MiniGraber\MiniGraber\obj\Debug\MiniGraber.MainForm.resources
 D:\Projects\MiniGraber\MiniGraber\obj\Debug\MiniGraber.PersonCard.resources
 D:\Projects\MiniGraber\MiniGraber\obj\Debug\MiniGraber.csprojAssemblyReference.cache
+D:\Projects\MiniGraber\MiniGraber\obj\Debug\MiniGraber.csproj.CoreCompileInputs.cache

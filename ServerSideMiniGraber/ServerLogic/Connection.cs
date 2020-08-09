@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
@@ -16,6 +17,8 @@ namespace ServerSideMiniGraber.ServerLogic
         Server server;
         CommandHolder cmdHolder;
 
+        public EndPoint EndPoint { get { return client.Client.RemoteEndPoint; } private set { } }
+
         public Connection(TcpClient client, Server server, CommandHolder cmdHolder)
         {
             this.client = client;
@@ -29,7 +32,7 @@ namespace ServerSideMiniGraber.ServerLogic
             try
             {
                 string fisrtMessage = GetMessage();
-                if (fisrtMessage != "Test:Test")
+                if (!fisrtMessage.Contains("Test:Test"))
                 {
                     Disconnect();
                     return;
@@ -38,6 +41,10 @@ namespace ServerSideMiniGraber.ServerLogic
                 while (true)
                 {
                     string request = GetMessage();
+                    if (request.Contains("Quit"))
+                    {
+                        Disconnect();
+                    }
                     if (request != "")
                     {
                         Console.WriteLine("New request: " + request);
@@ -48,8 +55,12 @@ namespace ServerSideMiniGraber.ServerLogic
                     SendMessage(response);
                 }
             }
-            catch 
+            catch (Exception e)
             {
+                if (e.HResult == -2146233040)
+                {
+                    return;
+                }
                 Disconnect();
                 return;
             }
@@ -72,7 +83,7 @@ namespace ServerSideMiniGraber.ServerLogic
 
         public void SendMessage(string data)
         {
-            byte[] dataB = Encoding.UTF8.GetBytes(data);
+            byte[] dataB = Encoding.UTF8.GetBytes(data + "\n");
             stream.Write(dataB, 0, dataB.Length);
         }
 

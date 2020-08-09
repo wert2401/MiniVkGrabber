@@ -10,8 +10,12 @@ namespace MiniGraber.Utils
     {
         public static List<Person> ParsePeople(string response)
         {
-            response = Regex.Replace(response, "{\"count\":([0-9]+),\"items\":", "");
-            response = response.Substring(0, response.Length - 1);
+            response = Regex.Replace(response, "\"response\":{\"count\":([0-9]+),\"items\":", "");
+            if (TryParseError(response))
+            {
+                return null;
+            }
+            response = response.Substring(1, response.Length - 4);
             List<Person> people = JsonConvert.DeserializeObject<List<Person>>(response);
             return people;
         }
@@ -19,16 +23,30 @@ namespace MiniGraber.Utils
         public static bool TryParseError(string response)
         {
             Error e;
-            e = JsonConvert.DeserializeObject<Error>(response);
-            if (e.error != null)
+            try
             {
-                return true;
+                e = JsonConvert.DeserializeObject<Error>(response);
+                if (e.error != null)
+                {
+                    return true;
+                }
             }
+            catch 
+            {
+                return false;
+            }
+            
             return false;
         }
 
         public static Person ParsePerson(string response)
         {
+            response = response.Replace("{\"response\":[", "");
+            response = response.Substring(0, response.Length - 3);
+            if (TryParseError(response))
+            {
+                return new Person();
+            }
             return JsonConvert.DeserializeObject<Person>(response);
         }
 

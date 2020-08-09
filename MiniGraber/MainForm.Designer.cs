@@ -31,7 +31,6 @@
             this.btnStart = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.tbUserId = new System.Windows.Forms.TextBox();
-            this.rtbResponse = new System.Windows.Forms.RichTextBox();
             this.frPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.lbCount = new System.Windows.Forms.Label();
@@ -39,6 +38,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.BtnClear = new System.Windows.Forms.Button();
+            this.lbTime = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnStart
@@ -52,7 +53,7 @@
             this.btnStart.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnStart.Location = new System.Drawing.Point(12, 430);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(289, 64);
+            this.btnStart.Size = new System.Drawing.Size(460, 64);
             this.btnStart.TabIndex = 1;
             this.btnStart.Text = "Get friends";
             this.btnStart.UseVisualStyleBackColor = false;
@@ -76,16 +77,6 @@
             this.tbUserId.TabIndex = 0;
             this.tbUserId.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbUserId_KeyDown);
             // 
-            // rtbResponse
-            // 
-            this.rtbResponse.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.rtbResponse.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.rtbResponse.Location = new System.Drawing.Point(12, 39);
-            this.rtbResponse.Name = "rtbResponse";
-            this.rtbResponse.Size = new System.Drawing.Size(289, 385);
-            this.rtbResponse.TabIndex = 3;
-            this.rtbResponse.Text = "";
-            // 
             // frPanel
             // 
             this.frPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -93,9 +84,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.frPanel.AutoScroll = true;
             this.frPanel.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.frPanel.Location = new System.Drawing.Point(307, 39);
+            this.frPanel.Location = new System.Drawing.Point(12, 39);
             this.frPanel.Name = "frPanel";
-            this.frPanel.Size = new System.Drawing.Size(586, 543);
+            this.frPanel.Size = new System.Drawing.Size(875, 385);
             this.frPanel.TabIndex = 4;
             // 
             // label2
@@ -165,20 +156,43 @@
             this.BtnClear.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.BtnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnClear.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BtnClear.Location = new System.Drawing.Point(12, 500);
+            this.BtnClear.Location = new System.Drawing.Point(478, 430);
             this.BtnClear.Name = "BtnClear";
-            this.BtnClear.Size = new System.Drawing.Size(289, 64);
+            this.BtnClear.Size = new System.Drawing.Size(409, 64);
             this.BtnClear.TabIndex = 10;
             this.BtnClear.Text = "Clear";
             this.BtnClear.UseVisualStyleBackColor = false;
             this.BtnClear.Click += new System.EventHandler(this.BtnClear_Click);
+            // 
+            // lbTime
+            // 
+            this.lbTime.AutoSize = true;
+            this.lbTime.BackColor = System.Drawing.Color.Transparent;
+            this.lbTime.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbTime.Location = new System.Drawing.Point(762, 16);
+            this.lbTime.Name = "lbTime";
+            this.lbTime.Size = new System.Drawing.Size(14, 13);
+            this.lbTime.TabIndex = 12;
+            this.lbTime.Text = "0";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label5.Location = new System.Drawing.Point(722, 16);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(38, 13);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "Time:";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(905, 594);
+            this.ClientSize = new System.Drawing.Size(905, 499);
+            this.Controls.Add(this.lbTime);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.BtnClear);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.lbName);
@@ -186,7 +200,6 @@
             this.Controls.Add(this.lbCount);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.frPanel);
-            this.Controls.Add(this.rtbResponse);
             this.Controls.Add(this.tbUserId);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnStart);
@@ -204,7 +217,6 @@
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox tbUserId;
-        private System.Windows.Forms.RichTextBox rtbResponse;
         private System.Windows.Forms.FlowLayoutPanel frPanel;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lbCount;
@@ -212,6 +224,8 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button BtnClear;
+        private System.Windows.Forms.Label lbTime;
+        private System.Windows.Forms.Label label5;
     }
 }
 

@@ -37,6 +37,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.roundPicture1 = new RoundImage.RoundPicture();
+            this.tbID = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.roundPicture1)).BeginInit();
@@ -60,6 +62,8 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.panel1.Controls.Add(this.tbID);
+            this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.tbCity);
             this.panel1.Controls.Add(this.tbBdate);
             this.panel1.Controls.Add(this.tbName);
@@ -68,7 +72,7 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(3, 276);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(270, 78);
+            this.panel1.Size = new System.Drawing.Size(270, 98);
             this.panel1.TabIndex = 4;
             // 
             // tbCity
@@ -159,6 +163,31 @@
             this.roundPicture1.TabIndex = 0;
             this.roundPicture1.TabStop = false;
             // 
+            // tbID
+            // 
+            this.tbID.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.tbID.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tbID.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbID.Location = new System.Drawing.Point(52, 70);
+            this.tbID.Name = "tbID";
+            this.tbID.ReadOnly = true;
+            this.tbID.Size = new System.Drawing.Size(172, 23);
+            this.tbID.TabIndex = 11;
+            this.tbID.TabStop = false;
+            this.tbID.Text = "{ID}";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label4.ForeColor = System.Drawing.Color.Black;
+            this.label4.Location = new System.Drawing.Point(3, 70);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(43, 23);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "ID: ";
+            // 
             // PersonCard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -168,7 +197,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "PersonCard";
-            this.Size = new System.Drawing.Size(276, 358);
+            this.Size = new System.Drawing.Size(276, 378);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -187,5 +216,7 @@
         private System.Windows.Forms.TextBox tbCity;
         private System.Windows.Forms.TextBox tbBdate;
         private System.Windows.Forms.TextBox tbName;
+        private System.Windows.Forms.TextBox tbID;
+        private System.Windows.Forms.Label label4;
     }
 }

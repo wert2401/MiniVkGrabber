@@ -41,7 +41,7 @@ namespace ServerSideMiniGraber.ServerLogic
                     threads.Add(clientThread);
                     connections.Add(cl);
                     clientThread.Start();
-                    Console.WriteLine("One connection was added. Connections now: " + connections.Count + ". Threads now: " + threads.Count);
+                    Console.WriteLine("Connection ["+ cl.EndPoint +"] was added at "+ DateTime.Now +". Connections now: " + connections.Count + ". Threads now: " + threads.Count);
                 }
             }
             catch (SocketException e) when (e.ErrorCode == 10004)

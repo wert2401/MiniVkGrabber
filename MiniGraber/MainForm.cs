@@ -1,10 +1,4 @@
 ﻿using System;
-using System.IO;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Collections.Generic;
@@ -22,35 +16,71 @@ namespace MiniGraber
             InitializeComponent();
         }
         // Починить
-        private void btnStart_Click(object sender, EventArgs e)
+        private async void btnStart_Click(object sender, EventArgs e)
         {
             ClearPanels();
-            Task.Run(UpdateTable);
-        }
-
-        private void UpdateTable()
-        {
-            btnStart.BeginInvoke((Action)(() => { btnStart.Enabled = false; rtbResponse.Text += false; }));
+            btnStart.Enabled = false;
             if (tbUserId.Text == "")
             {
                 MessageBox.Show("Check your id or adress", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                btnStart.BeginInvoke((Action)(() => { btnStart.Enabled = true; rtbResponse.Text += true; }));
+                btnStart.Enabled = true;
                 return;
             }
-            List<Person> people = client.GetFriends(tbUserId.Text);
-            Person p = client.GetPerson(tbUserId.Text);
 
-            foreach (Person item in people)
+            await SetName();
+            await RunGetFriendsAsyncAndParallel();
+            btnStart.Enabled = true;
+        }
+
+        private async Task RunGetFriendsAsyncAndParallel()
+        {
+            var sw = System.Diagnostics.Stopwatch.StartNew();
+            List<Person> people = await client.GetFriendsAsync(tbUserId.Text);
+            if (people ==  null)
             {
-                PersonCard pc = new PersonCard();
-                frPanel.BeginInvoke((Action)(() => { 
-                    frPanel.Controls.Add(pc);
-                    pc.SetPerson(item);
-                    lbName.Text = p.FullName;
-                    lbCount.Text = people.Count.ToString();
-                }));
+                MessageBox.Show("Error, this account is closed for unauth users or for not friends", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-            btnStart.BeginInvoke((Action)(() => { btnStart.Enabled = true; rtbResponse.Text += true; }));
+            List<Task> personTasks = new List<Task>();
+            lbCount.Text = people.Count.ToString();
+
+            //Способ с низкой загрузкой ЦП, но долгим выводом
+            //while (people.Count > 0)
+            //{
+            //    for (int i = 0; i < 5; i++)
+            //    {
+            //        if (people.Count <= 0)
+            //        {
+            //            break;
+            //        }
+            //        personTasks.Add(AddPersonCard(people[0]));
+            //        people.RemoveAt(0);
+            //    }
+
+            //    await Task.WhenAll(personTasks);
+            //    personTasks.Clear();
+            //}
+
+            //Способ с быстрыи выводом, но с большой нагрузкой на ЦП
+            foreach (var item in people)
+            {
+                AddPersonCard(item);
+            }
+            sw.Stop();
+            lbTime.Text = sw.ElapsedMilliseconds.ToString();
+        }
+
+        private async void AddPersonCard(Person person)
+        {
+            PersonCard pc = new PersonCard();
+            await pc.SetPerson(person);
+            frPanel.Controls.Add(pc);
+        }
+
+        private async Task SetName()
+        {
+            Person p = await client.GetPersonAsync(tbUserId.Text);
+            lbName.Text = p.FullName;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -83,12 +113,11 @@ namespace MiniGraber
 
         private void ClearPanels()
         {
-            rtbResponse.Text = "";
             lbCount.Text = "";
             lbName.Text = "";
             frPanel.Controls.Clear();
         }
-
+        
         private void BtnClear_Click(object sender, EventArgs e)
         {
             ClearPanels();

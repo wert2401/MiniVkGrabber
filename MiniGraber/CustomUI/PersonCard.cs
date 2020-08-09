@@ -21,18 +21,18 @@ namespace MiniGraber
             InitializeComponent();
         }
 
-        public void SetPerson(Person person)
+        public async Task SetPerson(Person person)
         {
             this.person = person;
             tbBdate.Text = $"{person.bdate}";
             tbCity.Text = $"{person.city.title}";
             tbName.Text = person.FullName;
+            tbID.Text = person.id.ToString();
             roundPicture1.Click += new EventHandler(OpenPersonPage);
-            SetImage(person);
+            await SetImage(person);
         }
-        private async void SetImage(Person person)
+        private async Task SetImage(Person person)
         {
-            Thread.Sleep(1000); 
             roundPicture1.Image = await MyHttpClient.GetImage(person.photo_200_orig);
         }
 

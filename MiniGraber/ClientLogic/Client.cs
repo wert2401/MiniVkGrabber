@@ -89,6 +89,11 @@ namespace MiniGraber.ClientLogic
             return JSONProcessor.ParsePeople(resp);
         }
 
+        public async Task<List<Person>> GetFriendsAsync(string id)
+        {
+            return await Task.Run(() => GetFriends(id));
+        }
+
         public Person GetPerson(string id)
         {
             string resp = "";
@@ -104,6 +109,11 @@ namespace MiniGraber.ClientLogic
                 }
             }
             return  JSONProcessor.ParsePerson(resp);
+        }
+
+        public async Task<Person> GetPersonAsync(string id)
+        {
+            return await Task.Run(() => GetPerson(id));
         }
 
         public void Disconnect()
